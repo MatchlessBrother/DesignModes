@@ -9,11 +9,19 @@ import com.example.designmode.factorymode.Animal;
 import com.example.designmode.decorationmode.DecorationObj;
 import com.example.designmode.proxymode.cglibproxymode.Shopper;
 import com.example.designmode.adaptermode.objadaptermode.Nurse;
+import com.example.designmode.combinationmode.safetytypemode.Bag;
+import com.example.designmode.combinationmode.safetytypemode.IBag;
 import com.example.designmode.adaptermode.objadaptermode.NewNurse;
+import com.example.designmode.combinationmode.safetytypemode.Goods;
 import com.example.designmode.adaptermode.objadaptermode.INewNurse;
+import com.example.designmode.combinationmode.transparentmode.BaoBao;
+import com.example.designmode.combinationmode.transparentmode.IThing;
+import com.example.designmode.stateMode.falsestatemode.WeekendAction;
 import com.example.designmode.factorymode.methodfactory.NurseFactory;
 import com.example.designmode.factorymode.simplefactory.PersonFactory;
 import com.example.designmode.observermode.pullobservermode.Colleague;
+import com.example.designmode.stateMode.truestatemode.WeekendSchedule;
+import com.example.designmode.combinationmode.transparentmode.ShangPin;
 import com.example.designmode.factorymode.methodfactory.PerrsonFactory;
 import com.example.designmode.proxymode.cglibproxymode.PurchasingAgent;
 import com.example.designmode.observermode.pullobservermode.Receptionist;
@@ -78,5 +86,127 @@ public class MainActivity extends AppCompatActivity
         Shopper proxyShopper = (Shopper)purchasingAgent.getProxyInstance(this,shopper);
         proxyShopper.action();
         /***************************************************************/
+        for(int time = 0;time <= 24;time++)
+        {
+            WeekendSchedule weekendSchedule = new WeekendSchedule();
+            weekendSchedule.cook(time);
+            weekendSchedule.startReleaseTime(time);
+        }
+        /***************************************************************/
+//        Bag bigBag = new Bag();
+//        bigBag.setName("大袋子");
+//        /**************************/
+//        Goods goods = new Goods();
+//        goods.setName("李宁的鞋子");
+//        goods.setValue(198f);
+//        bigBag.addThing(goods);
+//        /*************************************/
+//        try
+//        {
+//            Bag whiteBag = new Bag();
+//            whiteBag.setName("白色袋子");
+//            Goods sgxg = (Goods)goods.clone();
+//            sgxg.setName("韶关香菇");
+//            sgxg.setValue(68f);
+//            whiteBag.addThing(sgxg);
+//            whiteBag.addThing((Goods)sgxg.clone());
+//            Goods sghc = (Goods)goods.clone();
+//            sghc.setName("韶关红茶");
+//            sghc.setValue(180f);
+//            whiteBag.addThing(sghc);
+//            whiteBag.addThing((Goods)sghc.clone());
+//            whiteBag.addThing((Goods)sghc.clone());
+//            bigBag.addThing(whiteBag);
+//        }
+//        catch(CloneNotSupportedException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        /*************************************/
+//        try
+//        {
+//            Bag zhongBag = new Bag();
+//            zhongBag.setName("中袋子");
+//            Goods jdzcq = (Goods)goods.clone();
+//            jdzcq.setName("景德镇瓷器");
+//            jdzcq.setValue(380f);
+//            zhongBag.addThing(jdzcq);
+//            Bag redBag = new Bag();
+//            redBag.setName("红色袋子");
+//            Goods jytc = (Goods)goods.clone();
+//            jytc.setName("婺源特产");
+//            jytc.setValue(7.9f);
+//            redBag.addThing(jytc);
+//            redBag.addThing((Goods)jytc.clone());
+//            Goods jydt = (Goods)goods.clone();
+//            jydt.setName("婺源地图");
+//            jydt.setValue(9.9f);
+//            redBag.addThing(jydt);
+//            zhongBag.addThing(redBag);
+//            bigBag.addThing(zhongBag);
+//        }
+//        catch(CloneNotSupportedException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        bigBag.showThings(0);
+        /***************************************************************/
+        IThing bao = new BaoBao();
+        bao.setName("大袋子");
+        /**************************/
+        IThing sp = new ShangPin();
+        sp.setName("李宁的鞋子");
+        sp.setValue(198f);
+        bao.addThing(sp);
+        /*************************************/
+        try
+        {
+            IThing whiteBao = new BaoBao();
+            whiteBao.setName("白色袋子");
+            IThing sgxg = (IThing)sp.clone();
+            sgxg.setName("韶关香菇");
+            sgxg.setValue(68f);
+            whiteBao.addThing(sgxg);
+            whiteBao.addThing((IThing)sgxg.clone());
+            IThing sghc = (IThing)sp.clone();
+            sghc.setName("韶关红茶");
+            sghc.setValue(180f);
+            whiteBao.addThing(sghc);
+            whiteBao.addThing((IThing)sghc.clone());
+            whiteBao.addThing((IThing)sghc.clone());
+            bao.addThing(whiteBao);
+        }
+        catch(CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        /*************************************/
+        try
+        {
+            IThing zhongBag = new BaoBao();
+            zhongBag.setName("中袋子");
+            IThing jdzcq = (IThing)sp.clone();
+            jdzcq.setName("景德镇瓷器");
+            jdzcq.setValue(380f);
+            zhongBag.addThing(jdzcq);
+            IThing redBag = new BaoBao();
+            redBag.setName("红色袋子");
+            IThing jytc = (IThing)sp.clone();
+            jytc.setName("婺源特产");
+            jytc.setValue(7.9f);
+            redBag.addThing(jytc);
+            redBag.addThing((IThing)jytc.clone());
+            IThing jydt = (IThing)sp.clone();
+            jydt.setName("婺源地图");
+            jydt.setValue(9.9f);
+            redBag.addThing(jydt);
+            zhongBag.addThing(redBag);
+            bao.addThing(zhongBag);
+        }
+        catch(CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        bao.showThings(0);
     }
 }
