@@ -2,6 +2,12 @@ package com.example.designmode;
 
 import android.util.Log;
 import android.os.Bundle;
+
+import com.example.designmode.backupmode.BackupSecond;
+import com.example.designmode.backupmode.BackupSecondManager;
+import com.example.designmode.backupmode.Second;
+import com.example.designmode.iteratormode.GameIterator;
+import com.example.designmode.iteratormode.GameLevel;
 import com.example.myapplication.ReallyObj;
 import com.example.myapplication.SingleMode;
 import com.example.designmode.buildermode.Bike;
@@ -290,6 +296,43 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
         bao.showThings(0);
+        /******************************************************************************************/
+        BackupSecondManager backupSecondManager = new BackupSecondManager();
+        Second second = new Second();
+        second.setLatestSecond(1);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        second.setLatestSecond(2);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        second.setLatestSecond(3);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        second.setLatestSecond(4);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        second.setLatestSecond(5);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        second.setLatestSecond(6);
+        backupSecondManager.saveSecond(second.createBackupSecond());
+        /**********************************************************/
+        BackupSecond restoreBackupSecond = backupSecondManager.restoreSecond();
+        while(null != restoreBackupSecond)
+        {
+            second.restoreBackupSecond(restoreBackupSecond);
+            restoreBackupSecond = backupSecondManager.restoreSecond();
+        }
+        /******************************************************************************************/
+        GameLevel gameLevel = new GameLevel();
+        gameLevel.addChild(1);
+        gameLevel.addChild(2);
+        gameLevel.addChild(3);
+        gameLevel.addChild(4);
+        gameLevel.addChild(5);
+        gameLevel.addChild(6);
+        GameIterator iterator = (GameIterator) gameLevel.createIterator();
+        iterator.calibrationIndex();
+        while(iterator.hasNextChild())
+        {
+            Integer obj = (Integer) iterator.getNextChild();
+            Log.i("iteratormode","取出元素:" + obj);
+        }
         /******************************************************************************************/
     }
 }
