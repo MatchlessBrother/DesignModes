@@ -334,5 +334,6 @@ public class MainActivity extends AppCompatActivity
             Log.i("iteratormode","取出元素:" + obj);
         }
         /******************************************************************************************/
+        KotlinTestKt.test();
     }
 }
